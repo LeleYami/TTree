@@ -9,7 +9,7 @@
 #include "TRandom.h"
 
 void write_it(){
-   std::cout<<"write x`it..."<<std::endl;
+   std::cout<<"write it..."<<std::endl;
    //create a new file
    TFile* f=TFile::Open("test.root","recreate");
 
