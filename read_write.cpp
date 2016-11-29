@@ -6,7 +6,6 @@
 #include "TTree.h"
 #include "TBranch.h"
 #include "Mymath.h"
-#include "TRandom.h"
 
 void write_it(){
    std::cout<<"write it..."<<std::endl;
@@ -21,28 +20,21 @@ void write_it(){
 
    //create a root tree
    TTree* t=new TTree("t","A ROOT Tree With a few branches");
-   t->Branch("point",&point,"x:y:z");   
-   
-   Float_t px,py,pz;
-   static Float_t p[3];
+   t->Branch("point",&point,"x");   
+   t->Branch("point",&point,"y");   
+   t->Branch("point",&point,"z");   
    
    //create the objects
    Mymath* obj=new Mymath();
    obj->SetX(1.23);
-   px=1.23;
    obj->SetY(32.1);
-   py=32.1;
    obj->SetZ(1.23,32.1,1.23*1.23+32.1*32.1);
-   pz=1.23,32.1,1.23*1.23+32.1*32.1;
    obj->Write("anObject");
 
-   //fill the tree
-   p[0]=px;
-   p[1]=py;
-   p[2]=pz; 
-   point.x=1;
-   point.y=2;
-   point.z=3;
+   //fill structures
+   point.x=obj->GetX();
+   point.y=obj->GetY();
+   point.z=obj->GetZ();
    
    //fill the tree
    t->Fill();
@@ -85,6 +77,7 @@ void read_it(){
 
    obj->Print();
    std::cout<<"read it done."<<std::endl;   
+   delete obj;
 }
 
 void read_write(){
