@@ -2,5 +2,5 @@
 
 ClassImp(Mymath);
 void Mymath::Print() const{
-    std::cout<<"pz= "<<px<<"*"<<px<<"+"<<py<<"*"<<py<<std::endl;    
+    std::cout<<"px= "<<px<<"\n"<<"py= "<<py<<"\n"<<"pz= "<<pz<<std::endl;    
 }
