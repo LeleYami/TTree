@@ -20,16 +20,16 @@ void write_it(){
 
    //create a root tree
    TTree* t=new TTree("t","A ROOT Tree With a few branches");
-   t->Branch("point",&point,"x");   
-   t->Branch("point",&point,"y");   
-   t->Branch("point",&point,"z");   
+   t->Branch("x",&point,"Float_t x");   
+   t->Branch("y",&point,"Float_t y");   
+   t->Branch("z",&point,"Float_t z");   
    
    //create the objects
    Mymath* obj=new Mymath();
-   obj->SetX(1.23);
-   obj->SetY(32.1);
-   obj->SetZ(1.23,32.1,1.23*1.23+32.1*32.1);
-   obj->Write("anObject");
+   for(Int_t i=0;i<5;i++){
+   obj->SetX(1.23+i);
+   obj->SetY(32.1+i);
+   obj->SetZ(1.23+i,32.1+i,(1.23+i)*(1.23+i)+(32.1+i)*(32.1+i));
 
    //fill structures
    point.x=obj->GetX();
@@ -38,7 +38,9 @@ void write_it(){
    
    //fill the tree
    t->Fill();
-
+   }
+   obj->Write("anObject");
+   
    //save all objects in this file 
    f->Write();
 
