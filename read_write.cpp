@@ -14,15 +14,25 @@ void write_it(){
 
    //define some simple structures
    typedef struct {
-       Float_t x,y,z;
-   } POINT;
-   static POINT point;
-
+       Float_t x;
+   } POINT1;
+   static POINT1 point1;
+   
+   typedef struct{
+       Float_t y;
+   }POINT2;
+   static POINT2 point2;
+   
+   typedef struct{
+       Float_t z;
+   }POINT3;
+   static POINT3 point3;
+   
    //create a root tree
    TTree* t=new TTree("t","A ROOT Tree With a few branches");
-   t->Branch("x",&point,"Float_t x");   
-   t->Branch("y",&point,"Float_t y");   
-   t->Branch("z",&point,"Float_t z");   
+   t->Branch("x",&point1,"Float_t x");   
+   t->Branch("y",&point2,"Float_t y");   
+   t->Branch("z",&point3,"Float_t z");   
    
    //create the objects
    Mymath* obj=new Mymath();
@@ -32,9 +42,9 @@ void write_it(){
    obj->SetZ(1.23+i,32.1+i,(1.23+i)*(1.23+i)+(32.1+i)*(32.1+i));
 
    //fill structures
-   point.x=obj->GetX();
-   point.y=obj->GetY();
-   point.z=obj->GetZ();
+   point1.x=obj->GetX();
+   point2.y=obj->GetY();
+   point3.z=obj->GetZ();
    
    //fill the tree
    t->Fill();
